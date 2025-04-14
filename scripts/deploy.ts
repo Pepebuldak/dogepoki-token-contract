@@ -1,7 +1,9 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  // 컨트랙트 가져오기
+  const [deployer] = await ethers.getSigners();
+  console.log("[Deployer account address]: " + deployer.address);
+
   const TokenContract = await ethers.getContractFactory("DogePokiToken");
   const DogePokiToken = await TokenContract.deploy();
 
@@ -10,10 +12,9 @@ async function main() {
   console.log("CustomToken deployed to:", DogePokiToken.address);
 }
 
-
 main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-        console.error(error);
-        process.exit(1);
-    });
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
